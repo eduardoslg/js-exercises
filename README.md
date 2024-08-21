@@ -1,7 +1,7 @@
 Exercícios de Manipulação de Dados em JavaScript
 
 Exercício 1: Filtrar Usuários por Idade
-Cenário:
+</br>Cenário:
 Você tem uma lista de usuários, e cada usuário tem uma idade. Seu objetivo é filtrar os usuários que são maiores de idade (18 anos ou mais).
 
 Dados de entrada:
@@ -32,7 +32,7 @@ Resultado esperado:
 ***
 
 Exercício 2: Transformação de Dados
-Cenário:
+</br>Cenário:
 Você tem uma lista de produtos, e cada produto tem um preço em dólares. Seu objetivo é converter o preço de cada produto para reais, considerando uma taxa de conversão de 5,25.
 
 Dados de entrada:
@@ -68,7 +68,7 @@ Resultado esperado:
 ***
 
 Exercício 3: Agrupar Itens por Categoria
-Cenário:
+</br>Cenário:
 Você tem uma lista de itens, onde cada item pertence a uma categoria. Seu objetivo é agrupar esses itens por categoria.
 
 Dados de entrada:
@@ -109,7 +109,7 @@ Resultado esperado:
 ***
 
 Exercício 4: Contagem de Palavras em um Texto
-Cenário:
+</br>Cenário:
 Você tem um texto e deseja saber quantas vezes cada palavra aparece nele.
 
 Dados de entrada:
@@ -152,7 +152,7 @@ Resultado esperado:
 ***
 
 Exercício 5: Remover Duplicatas de um Array
-Cenário:
+</br>Cenário:
 Você tem um array de números e deseja remover os números duplicados.
 
 Dados de entrada:
@@ -176,7 +176,7 @@ Resultado esperado:
 ***
 
 Exercício 6: Calcular a Média de Avaliações
-Cenário:
+</br>Cenário:
 Você tem uma lista de produtos, e cada produto tem uma lista de avaliações (notas de 1 a 5). Seu objetivo é calcular a média das avaliações para cada produto.
 
 Dados de entrada:
@@ -220,7 +220,7 @@ Resultado esperado:
 ***
 
 Exercício 7: Encontrar a Data Mais Recente
-Cenário:
+</br>Cenário:
 Você tem uma lista de datas e deseja encontrar a data mais recente.
 
 Dados de entrada:
@@ -248,7 +248,7 @@ Resultado esperado:
 ***
 
 Exercício 8: Somar os Valores de um Array de Objetos
-Cenário:
+</br>Cenário:
 Você tem uma lista de transações, onde cada transação tem um valor. Seu objetivo é calcular a soma total dos valores.
 
 Dados de entrada:
@@ -280,7 +280,7 @@ Resultado esperado:
 ***
 
 Exercício 9: Agrupar Produtos por Categoria e Calcular Média de Preços
-Cenário:
+</br>Cenário:
 Você tem uma lista de produtos, onde cada produto pertence a uma categoria e tem um preço. Seu objetivo é agrupar os produtos por categoria e calcular a média de preços para cada categoria.
 
 Dados de entrada:
@@ -337,7 +337,7 @@ Resultado esperado:
 ***
 
 Exercício 10: Unir Informações de Listas Diferentes
-Cenário:
+</br>Cenário:
 Você tem duas listas: uma de clientes e outra de pedidos. Seu objetivo é unir as informações para que cada cliente tenha uma lista de seus pedidos.
 
 Dados de entrada:
@@ -381,7 +381,7 @@ Resultado esperado:
 ***
 
 Exercício 11: Cálculo de Faturamento Mensal
-Cenário:
+</br>Cenário:
 Você tem uma lista de transações de um mês, com data e valor. Precisa calcular o faturamento total por mês.
 
 Dados de entrada:
@@ -424,7 +424,7 @@ Resultado esperado:
 ***
 
 Exercício 12: Detecção de Produtos Repetidos
-Cenário:
+</br>Cenário:
 Você tem uma lista de produtos em um carrinho de compras, onde pode haver produtos repetidos. Precisa agrupar os produtos repetidos e somar suas quantidades.
 
 Dados de entrada:
@@ -466,7 +466,7 @@ Resultado esperado:
 ***
 
 Exercício 13: Detecção de Produtos Repetidos
-Cenário:
+</br>Cenário:
 Você tem uma lista de funcionários e precisa criar uma lista plana de funcionário e sua devida habilidade.
 
 Dados de entrada:
@@ -497,5 +497,117 @@ Resultado esperado:
   { "name": "Ana", "skill": "Spring" },
   { "name": "Bruno", "skill": "Python" },
   { "name": "Bruno", "skill": "Django" }
+]
+````
+
+***
+***
+***
+
+Exercício 14: Adicionar porcentagem de progresso
+</br>Cenário:
+Você tem uma lista de dados com id, startDate e expectedMinutes, você precisa verificar através do startDate e expectedMinutes a porcentagem de progresso e retornar o percentage no array.
+Será necessário utilizar funções do date-fns como addMinutes, isAfter e differenceInMinutes.
+
+Dados de entrada:
+````Javascript
+  const tasks = [
+    {
+      id: 1,
+      startDate: '2024-08-20T08:00:00',
+      expectedMinutes: 120,
+    },
+    {
+      id: 2,
+      startDate: '2024-08-20T09:30:00',
+      expectedMinutes: 90,
+    },
+    {
+      id: 3,
+      startDate: '2024-08-20T10:00:00',
+      expectedMinutes: 180,
+    },
+    {
+      id: 4,
+      startDate: '2024-08-21T16:00:00',
+      expectedMinutes: 60,
+    },
+    {
+      id: 5,
+      startDate: '2024-08-21T16:00:00',
+      expectedMinutes: 40,
+    },
+    {
+      id: 5,
+      startDate: '2024-08-22T16:00:00',
+      expectedMinutes: 60,
+    },
+  ]
+````
+
+Solução:
+````Javascript
+  function percentage(task) {
+    const now = new Date()
+    const startDate = new Date(task.startDate)
+    const finishDate = addMinutes(startDate, task.expectedMinutes)
+
+    if (isAfter(now, finishDate)) {
+      return 100
+    }
+
+    if (isAfter(startDate, now)) {
+      return 0
+    }
+
+    const elapsedMinutes = differenceInMinutes(now, startDate)
+    return (elapsedMinutes / task.expectedMinutes) * 100
+  }
+
+  const taskWithPercentage = tasks.map((task) => ({
+    ...task,
+    percentage: percentage(task),
+  }))
+````
+
+Resultado esperado:
+````Javascript
+[
+    {
+        "id": 1,
+        "startDate": "2024-08-20T08:00:00",
+        "expectedMinutes": 120,
+        "percentage": 100
+    },
+    {
+        "id": 2,
+        "startDate": "2024-08-20T09:30:00",
+        "expectedMinutes": 90,
+        "percentage": 100
+    },
+    {
+        "id": 3,
+        "startDate": "2024-08-20T10:00:00",
+        "expectedMinutes": 180,
+        "percentage": 100
+    },
+    {
+        "id": 4,
+        "startDate": "2024-08-21T16:00:00",
+        "expectedMinutes": 60,
+        "percentage": 66.66666666666666
+    },
+    {
+        "id": 5,
+        "startDate": "2024-08-21T16:00:00",
+        "expectedMinutes": 40,
+        "percentage": 100
+    },
+    {
+        "id": 5,
+        "startDate": "2024-08-22T16:00:00",
+        "expectedMinutes": 60,
+        "percentage": 0
+    }
 ]
 ````

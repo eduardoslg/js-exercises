@@ -611,3 +611,66 @@ Resultado esperado:
     }
 ]
 ````
+
+***
+***
+***
+
+Exercício 15: Organizar datas da mais recente pra mais antiga
+</br>Cenário:
+Você tem uma lista de dados com id e createdAt, você precisa organizar os dados da data mais recente pra mais antiga
+
+Dados de entrada:
+````Javascript
+  const dates = [
+    { id: 1, createdAt: '2024-08-15 12:33' },
+    { id: 2, createdAt: '2024-08-18 12:32' },
+    { id: 3, createdAt: '2024-08-10 12:33' },
+    { id: 4, createdAt: '2024-08-08 11:52' },
+    { id: 5, createdAt: '2024-08-10 12:32' },
+  ]
+````
+
+Solução:
+````Javascript
+  const sortedDates = dates.sort((a, b) => {
+    const dateA = new Date(a.createdAt)
+    const dateB = new Date(b.createdAt)
+
+    if (isBefore(dateA, dateB)) {
+      return 1
+    }
+
+    if (isAfter(dateA, dateB)) {
+      return -1
+    }
+
+    return 0
+  })
+````
+
+Resultado esperado:
+````Javascript
+[
+    {
+        "id": 2,
+        "createdAt": "2024-08-18 12:32"
+    },
+    {
+        "id": 1,
+        "createdAt": "2024-08-15 12:33"
+    },
+    {
+        "id": 3,
+        "createdAt": "2024-08-10 12:33"
+    },
+    {
+        "id": 5,
+        "createdAt": "2024-08-10 12:32"
+    },
+    {
+        "id": 4,
+        "createdAt": "2024-08-08 11:52"
+    }
+]
+````

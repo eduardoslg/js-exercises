@@ -114,7 +114,7 @@ Você tem um texto e deseja saber quantas vezes cada palavra aparece nele.
 
 Dados de entrada:
 ````Javascript
-const texto = "o rato roeu a roupa do rei de roma";
+const texto = "o rato roeu a roupa do rei de roma e o rato morreu de fome";
 ````
 
 Solução:

@@ -6,28 +6,24 @@ Você tem uma lista de usuários, e cada usuário tem uma idade. Seu objetivo é
 
 Dados de entrada:
 ````Javascript
-const usuarios = [
-  { nome: "Carlos", idade: 17 },
-  { nome: "Ana", idade: 22 },
-  { nome: "Bruno", idade: 19 },
-  { nome: "Pedro", idade: 15 }
+const users = [
+  { name: "Carlos", age: 17 },
+  { name: "Ana", age: 22 },
+  { name: "Bruno", age: 19 },
+  { name: "Pedro", age: 15 }
 ];
 ````
 
 Solução:
 ````Javascript
-function filtrarMaioresDeIdade(usuarios) {
-  return usuarios.filter(usuario => usuario.idade >= 18);
-}
-
-const maioresDeIdade = filtrarMaioresDeIdade(usuarios);
+const usersOfLegalAge = users.filter(user => user.age >= 18)
 ````
 
 Resultado esperado:
 ````Javascript
 [
-  { nome: "Ana", idade: 22 },
-  { nome: "Bruno", idade: 19 }
+  { name: "Ana", age: 22 },
+  { name: "Bruno", age: 19 }
 ]
 ````
 
@@ -41,33 +37,29 @@ Você tem uma lista de produtos, e cada produto tem um preço em dólares. Seu o
 
 Dados de entrada:
 ````Javascript
-const produtos = [
-  { nome: "Notebook", preco: 1000 },
-  { nome: "Smartphone", preco: 600 },
-  { nome: "Tablet", preco: 400 }
+const products = [
+  { name: "Notebook", price: 1000 },
+  { name: "Smartphone", price: 600 },
+  { name: "Tablet", price: 400 }
 ];
 
-const taxaDeConversao = 5.25;
+const conversionRate = 5.25;
 ````
 
 Solução:
 ````Javascript
-function converterPrecosParaReais(produtos, taxaDeConversao) {
-  return produtos.map(produto => ({
-    nome: produto.nome,
-    preco: produto.preco * taxaDeConversao
-  }));
-}
-
-const produtosEmReais = converterPrecosParaReais(produtos, taxaDeConversao);
+const productsWithAValueInReais = products.map(product => ({
+  name: product.name,
+  price: product.price * conversionRate
+}))
 ````
 
 Resultado esperado:
 ````Javascript
 [
-  { nome: "Notebook", preco: 5250 },
-  { nome: "Smartphone", preco: 3150 },
-  { nome: "Tablet", preco: 2100 }
+  { name: "Notebook", price: 5250 },
+  { name: "Smartphone", price: 3150 },
+  { name: "Tablet", price: 2100 }
 ]
 ````
 
@@ -81,28 +73,26 @@ Você tem uma lista de itens, onde cada item pertence a uma categoria. Seu objet
 
 Dados de entrada:
 ````Javascript
-const itens = [
-  { nome: "Camiseta", categoria: "Roupas" },
-  { nome: "Calça", categoria: "Roupas" },
-  { nome: "Notebook", categoria: "Eletrônicos" },
-  { nome: "Smartphone", categoria: "Eletrônicos" },
-  { nome: "Tênis", categoria: "Calçados" }
+const items = [
+  { name: "Camiseta", category: "Roupas" },
+  { name: "Calça", category: "Roupas" },
+  { name: "Notebook", category: "Eletrônicos" },
+  { name: "Smartphone", category: "Eletrônicos" },
+  { name: "Tênis", category: "Calçados" }
 ];
 ````
 
 Solução:
 ````Javascript
-function agruparPorCategoria(itens) {
-  return itens.reduce((acc, item) => {
-    if (!acc[item.categoria]) {
-      acc[item.categoria] = [];
-    }
-    acc[item.categoria].push(item.nome);
-    return acc;
-  }, {});
-}
+const itemsGroupedByCategory = items.reduce((acc, item) => {
+  if (!acc[item.category]) {
+    acc[item.category] = []
+  }
 
-const itensAgrupados = agruparPorCategoria(itens);
+  acc[item.category].push(item.name)
+
+  return acc
+}, {})
 ````
 
 Resultado esperado:
@@ -129,29 +119,31 @@ const texto = "o rato roeu a roupa do rei de roma";
 
 Solução:
 ````Javascript
-function contarPalavras(texto) {
-  const palavras = texto.split(" ");
-  return palavras.reduce((acc, palavra) => {
-    acc[palavra] = (acc[palavra] || 0) + 1;
-    return acc;
-  }, {});
-}
+const text = "o rato roeu a roupa do rei de roma e o rato morreu de fome";
+const splittedText = text.split(" ")
 
-const contagemDePalavras = contarPalavras(texto);
+const quantityOfEachWord = splittedText.reduce((acc, word) => {
+  acc[word] = (acc[word] || 0) + 1
+
+  return acc
+}, {})
 ````
 
 Resultado esperado:
 ````Javascript
 {
-  "o": 2,
-  "rato": 1,
-  "roeu": 1,
-  "a": 1,
-  "roupa": 1,
-  "do": 1,
-  "rei": 1,
-  "de": 1,
-  "roma": 1
+    "o": 2,
+    "rato": 2,
+    "roeu": 1,
+    "a": 1,
+    "roupa": 1,
+    "do": 1,
+    "rei": 1,
+    "de": 2,
+    "roma": 1,
+    "e": 1,
+    "morreu": 1,
+    "fome": 1
 }
 ````
 
@@ -165,21 +157,18 @@ Você tem um array de números e deseja remover os números duplicados.
 
 Dados de entrada:
 ````Javascript
-const numeros = [1, 2, 2, 3, 4, 4, 5];
+const numbers = [1, 2, 2, 3, 4, 4, 5, 5, 5, 99, 99, 9, 99];
+
 ````
 
 Solução:
 ````Javascript
-function removerDuplicatas(numeros) {
-  return [...new Set(numeros)];
-}
-
-const numerosUnicos = removerDuplicatas(numeros);
+const removeDuplicateNumbers = [...new Set(numbers)];
 ````
 
 Resultado esperado:
 ````Javascript
-[1, 2, 3, 4, 5]
+[1, 2, 3, 4, 5, 99, 9]
 ````
 
 ***
@@ -192,32 +181,37 @@ Você tem uma lista de produtos, e cada produto tem uma lista de avaliações (n
 
 Dados de entrada:
 ````Javascript
-const produtos = [
-  { nome: "Notebook", avaliacoes: [5, 4, 4, 5] },
-  { nome: "Smartphone", avaliacoes: [3, 4, 2, 5, 3] },
-  { nome: "Tablet", avaliacoes: [5, 5, 4] }
+const products = [
+  { name: "Notebook", reviews: [5, 4, 4, 5] },
+  { name: "Smartphone", reviews: [3, 4, 2, 5, 3] },
+  { name: "Tablet", reviews: [5, 5, 4] }
 ];
 ````
 
 Solução:
 ````Javascript
-function calcularMediaAvaliacoes(avaliacoes) {
-  const total = avaliacoes.reduce((acc, nota) => acc + nota, 0);
-  return Number((total / avaliacoes.length).toFixed(2));
-}
+const calculatedAverageProducts = products.map(product => {
+  const total = product.reviews.reduce((acc, review) => {
+    acc += review
 
-const produtosComMedia = produtos.map(produto => ({
-  nome: produto.nome,
-  mediaAvaliacoes: calcularMediaAvaliacoes(produto.avaliacoes)
-}));
+    return acc
+  }, 0)
+
+  const average = Number((total / product.reviews.length).toFixed(2))
+
+  return {
+    name: product.name,
+    average, 
+  }
+})
 ````
 
 Resultado esperado:
 ````Javascript
 [
-  { nome: "Notebook", mediaAvaliacoes: 4.5 },
-  { nome: "Smartphone", mediaAvaliacoes: 3.4 },
-  { nome: "Tablet", mediaAvaliacoes: 4.67 }
+  { name: "Notebook", average: 4.5 },
+  { name: "Smartphone", average: 3.4 },
+  { name: "Tablet", average: 4.67 }
 ]
 ````
 
@@ -231,23 +225,17 @@ Você tem uma lista de datas e deseja encontrar a data mais recente.
 
 Dados de entrada:
 ````Javascript
-const datas = [
+const dates = [
+  "2024-06-30",
   "2024-07-01",
   "2024-08-15",
-  "2024-06-30",
   "2024-08-20"
 ];
 ````
 
 Solução:
 ````Javascript
-function encontrarDataMaisRecente(datas) {
-  return datas.reduce((maisRecente, data) => 
-    new Date(data) > new Date(maisRecente) ? data : maisRecente
-  );
-}
-
-const dataMaisRecente = encontrarDataMaisRecente(datas);
+const mostRecentDate = dates.reduce((acc, date) => new Date(date) > new Date(acc) ? date : acc)
 ````
 
 Resultado esperado:
@@ -265,21 +253,21 @@ Você tem uma lista de transações, onde cada transação tem um valor. Seu obj
 
 Dados de entrada:
 ````Javascript
-const transacoes = [
-  { descricao: "Venda", valor: 100 },
-  { descricao: "Compra", valor: -50 },
-  { descricao: "Venda", valor: 200 },
-  { descricao: "Compra", valor: -150 }
+const transactions = [
+  { description: "Venda", value: 100 },
+  { description: "Compra", value: -50 },
+  { description: "Venda", value: 200 },
+  { description: "Compra", value: -150 }
 ];
 ````
 
 Solução:
 ````Javascript
-function somarValores(transacoes) {
-  return transacoes.reduce((total, transacao) => total + transacao.valor, 0);
-}
+const totalValueOfTransaction = transactions.reduce((acc, transaction) => {
+  acc += transaction.value
 
-const valorTotal = somarValores(transacoes);
+  return acc
+}, 0)
 ````
 
 Resultado esperado:
@@ -297,41 +285,50 @@ Você tem uma lista de produtos, onde cada produto pertence a uma categoria e te
 
 Dados de entrada:
 ````Javascript
-const produtos = [
-  { nome: "Notebook", categoria: "Eletrônicos", preco: 1000 },
-  { nome: "Smartphone", categoria: "Eletrônicos", preco: 600 },
-  { nome: "Tablet", categoria: "Eletrônicos", preco: 400 },
-  { nome: "Camiseta", categoria: "Roupas", preco: 50 },
-  { nome: "Calça", categoria: "Roupas", preco: 80 }
+const products = [
+  { name: "Notebook", category: "Eletrônicos", price: 1000 },
+  { name: "Smartphone", category: "Eletrônicos", price: 600 },
+  { name: "Tablet", category: "Eletrônicos", price: 400 },
+  { name: "Camiseta", category: "Roupas", price: 50 },
+  { name: "Calça", category: "Roupas", price: 80 }
 ];
 ````
 
 Solução:
 ````Javascript
-function agruparECalcularMediaPorCategoria(produtos) {
-  const agrupado = produtos.reduce((acc, produto) => {
-    if (!acc[produto.categoria]) {
-      acc[produto.categoria] = { total: 0, quantidade: 0 };
+function categoriesAndAveragePrice(products) {
+  const agroupedProducts = products.reduce((acc, product) => {
+    if (!acc[product.category]) {
+      acc[product.category] = { total: 0, quantity: 0 }
     }
-    acc[produto.categoria].total += produto.preco;
-    acc[produto.categoria].quantidade += 1;
-    return acc;
-  }, {});
 
-  return Object.keys(agrupado).map(categoria => ({
-    categoria,
-    mediaPreco: Number((agrupado[categoria].total / agrupado[categoria].quantidade).toFixed(2))
-  }));
+    acc[product.category].total += product.price
+    acc[product.category].quantity += 1
+  
+    return acc
+  }, {})
+
+
+  const output = Object.keys(agroupedProducts).map(category => ({
+    category,
+    average: agroupedProducts[category].total / agroupedProducts[category].quantity
+  }))
+
+  return output
 }
-
-const mediaPorCategoria = agruparECalcularMediaPorCategoria(produtos);
 ````
 
 Resultado esperado:
 ````Javascript
 [
-  { categoria: "Eletrônicos", mediaPreco: 666.67 },
-  { categoria: "Roupas", mediaPreco: 65.00 }
+    {
+        "category": "Eletrônicos",
+        "average": 666.6666666666666
+    },
+    {
+        "category": "Roupas",
+        "average": 65
+    }
 ]
 ````
 
@@ -345,39 +342,37 @@ Você tem duas listas: uma de clientes e outra de pedidos. Seu objetivo é unir 
 
 Dados de entrada:
 ````Javascript
-const clientes = [
-  { id: 1, nome: "Carlos Lima" },
-  { id: 2, nome: "Ana Souza" },
-  { id: 3, nome: "Bruno Silva" }
+const clients = [
+  { id: 1, name: "Carlos Lima" },
+  { id: 2, name: "Ana Souza" },
+  { id: 3, name: "Bruno Silva" }
 ];
 
-const pedidos = [
-  { clienteId: 1, produto: "Notebook" },
-  { clienteId: 1, produto: "Mouse" },
-  { clienteId: 2, produto: "Teclado" }
+const requests = [
+  { clientId: 1, product: "Notebook" },
+  { clientId: 1, product: "Mouse" },
+  { clientId: 2, product: "Teclado" }
 ];
 ````
 
 Solução:
 ````Javascript
-function unirClientesEPedidos(clientes, pedidos) {
-  return clientes.map(cliente => ({
-    ...cliente,
-    pedidos: pedidos
-      .filter(pedido => pedido.clienteId === cliente.id)
-      .map(pedido => pedido.produto)
-  }));
-}
+const clientsWithRequest = clients.map(client => {
+  const clientRequest = requests.filter(request => request.clientId === client.id)
 
-const clientesComPedidos = unirClientesEPedidos(clientes, pedidos);
+  return {
+    ...client,
+    request: clientRequest
+  }
+})
 ````
 
 Resultado esperado:
 ````Javascript
 [
-  { id: 1, nome: "Carlos Lima", pedidos: ["Notebook", "Mouse"] },
-  { id: 2, nome: "Ana Souza", pedidos: ["Teclado"] },
-  { id: 3, nome: "Bruno Silva", pedidos: [] }
+  { id: 1, name: "Carlos Lima", requests: ["Notebook", "Mouse"] },
+  { id: 2, name: "Ana Souza", requests: ["Teclado"] },
+  { id: 3, name: "Bruno Silva", requests: [] }
 ]
 ````
 
@@ -391,29 +386,29 @@ Você tem uma lista de transações de um mês, com data e valor. Precisa calcul
 
 Dados de entrada:
 ````Javascript
-const transacoes = [
-  { "data": "2024-07-01", "valor": 100 },
-  { "data": "2024-07-15", "valor": 200 },
-  { "data": "2024-08-01", "valor": 150 },
-  { "data": "2024-08-20", "valor": 300 }
+const transactions = [
+  { date: "2024-07-01", value: 100 },
+  { date: "2024-07-15", value: 200 },
+  { date: "2024-08-01", value: 150 },
+  { date: "2024-08-20", value: 300 }
 ];
 ````
 
 Solução:
 ````Javascript
-const faturamentoMensal = transacoes.reduce((acumulador, transacao) => {
-  const [ano, mes] = transacao.data.split('-');
+const monthlyBilling = transactions.reduce((acc, transaction) => {
+  const [year, month] = transaction.date.split("-")
 
-  const chaveMes = `${ano}-${mes}`;
+  const yearAndMonth = `${year}-${month}`
 
-  if (acumulador[chaveMes]) {
-    acumulador[chaveMes] += transacao.valor;
-  } else {
-    acumulador[chaveMes] = transacao.valor;
+  if (!acc[yearAndMonth]) {
+    acc[yearAndMonth] = 0
   }
 
-  return acumulador;
-}, {});
+  acc[yearAndMonth] += transaction.value
+
+  return acc
+}, {})
 ````
 
 Resultado esperado:
@@ -434,35 +429,35 @@ Você tem uma lista de produtos em um carrinho de compras, onde pode haver produ
 
 Dados de entrada:
 ````Javascript
-const carrinho = [
-  { "produto": "Notebook", "quantidade": 1 },
-  { "produto": "Mouse", "quantidade": 2 },
-  { "produto": "Notebook", "quantidade": 1 },
-  { "produto": "Teclado", "quantidade": 1 }
+const cart = [
+  { productName: "Notebook", quantity: 1 },
+  { productName: "Mouse", quantity: 2 },
+  { productName: "Notebook", quantity: 1 },
+  { productName: "Teclado", quantity: 1 }
 ];
 ````
 
 Solução:
 ````Javascript
-const produtosAgrupados = carrinho.reduce((acumulador, item) => {
-  const produtoExistente = acumulador.find(prod => prod.produto === item.produto);
+const agroupedProducts = cart.reduce((acc, product) => {
+  const findProduct = acc.find(item => item.productName === product.productName)
 
-  if (produtoExistente) {
-    produtoExistente.quantidade += item.quantidade;
+  if (findProduct) {
+    findProduct.quantity += product.quantity
   } else {
-    acumulador.push({ produto: item.produto, quantidade: item.quantidade });
+    acc.push(product)
   }
 
-  return acumulador;
-}, []);
+  return acc
+}, [])
 ````
 
 Resultado esperado:
 ````Javascript
 [
-  { "produto": "Notebook", "quantidade": 2 },
-  { "produto": "Mouse", "quantidade": 2 },
-  { "produto": "Teclado", "quantidade": 1 }
+  { "productName": "Notebook", "quantity": 2 },
+  { "productName": "Mouse", "quantity": 2 },
+  { "productName": "Teclado", "quantity": 1 }
 ]
 ````
 
@@ -472,23 +467,23 @@ Resultado esperado:
 
 Exercício 13: Detecção de Produtos Repetidos
 Cenário:
-Você tem uma lista de produtos em um carrinho de compras, onde pode haver produtos repetidos. Precisa agrupar os produtos repetidos e somar suas quantidades.
+Você tem uma lista de funcionários e precisa criar uma lista plana de funcionário e sua devida habilidade.
 
 Dados de entrada:
 ````Javascript
-const funcionarios = [
-  { "nome": "Carlos", "habilidades": ["JavaScript", "React"] },
-  { "nome": "Ana", "habilidades": ["Java", "Spring"] },
-  { "nome": "Bruno", "habilidades": ["Python", "Django"] }
+const employees = [
+  { "name": "Carlos", "skills": ["JavaScript", "React"] },
+  { "name": "Ana", "skills": ["Java", "Spring"] },
+  { "name": "Bruno", "skills": ["Python", "Django"] }
 ];
 ````
 
 Solução:
 ````Javascript
-const funcionariosPlanos = funcionarios.flatMap(funcionario =>
-  funcionario.habilidades.map(habilidade => ({
-    nome: funcionario.nome,
-    habilidade: habilidade
+const flatListOfEmployees = employees.flatMap(employee =>
+  employee.skills.map(skill => ({
+    nome: employee.name,
+    skill,
   }))
 );
 ````
@@ -496,11 +491,11 @@ const funcionariosPlanos = funcionarios.flatMap(funcionario =>
 Resultado esperado:
 ````Javascript
 [
-  { "nome": "Carlos", "habilidade": "JavaScript" },
-  { "nome": "Carlos", "habilidade": "React" },
-  { "nome": "Ana", "habilidade": "Java" },
-  { "nome": "Ana", "habilidade": "Spring" },
-  { "nome": "Bruno", "habilidade": "Python" },
-  { "nome": "Bruno", "habilidade": "Django" }
+  { "name": "Carlos", "skill": "JavaScript" },
+  { "name": "Carlos", "skill": "React" },
+  { "name": "Ana", "skill": "Java" },
+  { "name": "Ana", "skill": "Spring" },
+  { "name": "Bruno", "skill": "Python" },
+  { "name": "Bruno", "skill": "Django" }
 ]
 ````
